@@ -1,0 +1,4 @@
+body::-webkit-scrollbar {
+    width: 0; /* Remove scrollbar width */
+    background: transparent; /* Make scrollbar transparent */
+}
