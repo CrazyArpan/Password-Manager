@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
-import Swal from "sweetalert2";
 
 
 const Manager = () => {
@@ -22,10 +21,6 @@ const Manager = () => {
   }, []);
 
   const copyText = (text) => {
-    Swal.fire({
-      title: "Password Copied!",
-      icon: "success",
-    });
     navigator.clipboard.writeText(text);
   };
 
@@ -54,16 +49,9 @@ const Manager = () => {
       );
       console.log([...passwordArray, form]);
       setform({ site: "", username: "", password: "" });
-      Swal.fire({
-        title: "Password Saved!",
-        icon: "success",
-      });
+      
     } else {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Password Not Saved!",
-      });
+      
     }
   };
 
@@ -76,10 +64,6 @@ const Manager = () => {
         "password",
         JSON.stringify(passwordArray.filter((item) => item.id !== id))
       );
-      Swal.fire({
-        title: "Password Deleted!",
-        icon: "success",
-      });
     }
   };
 
