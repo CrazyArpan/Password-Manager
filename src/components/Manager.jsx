@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { v4 as uuidv4 } from "uuid";
+import Swal from "sweetalert2";
+
 
 const Manager = () => {
   const ref = useRef();
@@ -22,15 +22,9 @@ const Manager = () => {
   }, []);
 
   const copyText = (text) => {
-    toast("Copied to clipboard!", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
+    Swal.fire({
+      title: "Password Copied!",
+      icon: "success",
     });
     navigator.clipboard.writeText(text);
   };
@@ -60,9 +54,16 @@ const Manager = () => {
       );
       console.log([...passwordArray, form]);
       setform({ site: "", username: "", password: "" });
-      toast("Password Saved!");
+      Swal.fire({
+        title: "Password Saved!",
+        icon: "success",
+      });
     } else {
-      toast("Error: Password not saved!");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Password Not Saved!",
+      });
     }
   };
 
@@ -75,7 +76,10 @@ const Manager = () => {
         "password",
         JSON.stringify(passwordArray.filter((item) => item.id !== id))
       );
-      toast("Password Deleted!");
+      Swal.fire({
+        title: "Password Deleted!",
+        icon: "success",
+      });
     }
   };
 
@@ -84,27 +88,11 @@ const Manager = () => {
     setform(passwordArray.filter((i) => i.id === id)[0]);
     setpasswordArray(passwordArray.filter((item) => item.id !== id));
   };
-
   const handleChange = (e) => {
     setform({ ...form, [e.target.name]: e.target.value });
   };
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        transition="Bounce"
-      />
-      {/* Same as */}
-      <ToastContainer />
       <div>
         <div className="absolute inset-0 -z-10 h-full w-full bg-white [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#63e_100%)]"></div>
       </div>
